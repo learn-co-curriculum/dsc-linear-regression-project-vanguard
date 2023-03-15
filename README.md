@@ -443,7 +443,8 @@ None
 # Create a df with the target as the first column,
 # then compute the correlation matrix
 heatmap_data = train
-corr = heatmap_data.corr()
+corr = heatmap_data[['prod_id','piece_count','min_age','max_age','difficulty_level',
+                     'num_reviews','star_rating','list_price']].corr()
 
 # Set up figure and axes
 fig, ax = plt.subplots(figsize=(5, 8))
@@ -1093,7 +1094,7 @@ print("Validation score:", baseline_scores["test_score"].mean())
 
     Current Model
     Train score:      0.7884552982196166
-    Validation score: 0.7558203636660551
+    Validation score: 0.755820363666055
     
     Baseline Model
     Train score:      0.7785726407224942
@@ -1164,6 +1165,14 @@ import statsmodels.api as sm
 sm.OLS(y_train, sm.add_constant(X_train_second_model)).fit().summary()
 ```
 
+    /Users/pisel/opt/anaconda3/envs/learn-env/lib/python3.8/site-packages/statsmodels/tsa/base/tsa_model.py:7: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+      from pandas import (to_datetime, Int64Index, DatetimeIndex, Period,
+    /Users/pisel/opt/anaconda3/envs/learn-env/lib/python3.8/site-packages/statsmodels/tsa/base/tsa_model.py:7: FutureWarning: pandas.Float64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+      from pandas import (to_datetime, Int64Index, DatetimeIndex, Period,
+    /Users/pisel/opt/anaconda3/envs/learn-env/lib/python3.8/site-packages/statsmodels/tsa/tsatools.py:142: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only.
+      x = pd.concat(x[::order], 1)
+
+
 
 
 
@@ -1179,10 +1188,10 @@ sm.OLS(y_train, sm.add_constant(X_train_second_model)).fit().summary()
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   506.8</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Fri, 28 May 2021</td> <th>  Prob (F-statistic):</th> <td>2.40e-183</td>
+  <th>Date:</th>             <td>Wed, 15 Mar 2023</td> <th>  Prob (F-statistic):</th> <td>2.40e-183</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>17:13:18</td>     <th>  Log-Likelihood:    </th> <td> -2741.4</td> 
+  <th>Time:</th>                 <td>15:24:17</td>     <th>  Log-Likelihood:    </th> <td> -2741.4</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   558</td>      <th>  AIC:               </th> <td>   5493.</td> 
@@ -1347,7 +1356,7 @@ print("Validation score:", baseline_scores["test_score"].mean())
     
     Second Model
     Train score:      0.7884552982196166
-    Validation score: 0.7558203636660551
+    Validation score: 0.755820363666055
     
     Baseline Model
     Train score:      0.7785726407224942
@@ -1521,6 +1530,24 @@ results_df.fillna("No", inplace=True)
 
 results_df
 ```
+
+    <ipython-input-25-8b4ec5a5753a>:12: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:29: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:29: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:29: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:44: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:44: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:44: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+    <ipython-input-25-8b4ec5a5753a>:52: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+      results_df = results_df.append({
+
 
 
 
@@ -1822,7 +1849,7 @@ print("Intercept:", final_model.intercept_)
     difficulty_level    2.044057
     Name: Coefficients, dtype: float64
     
-    Intercept: 9.680845111984254
+    Intercept: 9.680845111984276
 
 
 Interpret these values below. What is the pricing algorithm you have developed?
@@ -2141,15 +2168,6 @@ Now that you've completed your project, let's put it into an easily presentable 
 4. Run your notebook from start to finish, then save it.
 5. Create a README.md file in your repository with a brief summary of your project.
 6. Push your updated repository to GitHub to share with your instructor and employers!
-
-# Level Up: Project Enhancements
-
-After completing the project, you could consider the following enhancements if you have time:
-
-* Engineer new features to improve the predictive power of your model
-* Identify and remove outliers, then redo the analysis
-* Identify models with high or low value for LEGO buyers, using the differences between actual and predicted prices
-* Conduct statistical tests using the numeric features in the dataset to make inferences about the population of LEGO sets
 
 ## Summary
 
